@@ -116,6 +116,8 @@ public:
 
     void setSafeThreading(bool b);
     bool getSafeThreading();
+    
+    void setThreadSleep(float usleep);
 
 	int getNumDevices();
 
@@ -376,6 +378,8 @@ private:
     bool bInitGrabBackgroundPixels;
     bool bGrabBackgroundPixels;
     bool bUseSafeThreading;
+    
+    float  fThreadSleep_us;
 
     bool bUseRegistration;
     bool bUseMirror;

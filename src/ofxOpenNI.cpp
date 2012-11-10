@@ -78,6 +78,8 @@ ofxOpenNI::ofxOpenNI(){
 	bNewPixels = false;
 	bNewFrame = false;
     
+    fThreadSleep_us = 500;
+    
     width = XN_VGA_X_RES;
     height = XN_VGA_Y_RES;
     fps = 30;
@@ -1236,6 +1238,11 @@ void ofxOpenNI::threadedFunction(){
     if(bIsShuttingDown) return;
 	while(isThreadRunning()){
 		updateGenerators();
+        
+        if (fThreadSleep_us > 0)
+        {
+            usleep((useconds_t)fThreadSleep_us);
+        }
 	}
 }
 
@@ -2682,6 +2689,12 @@ void ofxOpenNI::setSafeThreading(bool b){
 //--------------------------------------------------------------
 bool ofxOpenNI::getSafeThreading(){
     return bUseSafeThreading;
+}
+
+
+void ofxOpenNI::setThreadSleep(float usleep)
+{
+    fThreadSleep_us = usleep;
 }
 
 /**************************************************************
