@@ -160,6 +160,11 @@ unsigned char* ofxDepthGenerator::getDepthPixels(int nearThreshold, int farThres
 	return maskPixels[0];
 }
 
+ofTexture& ofxDepthGenerator::getDepthTexture()
+{
+    return depth_texture;
+}
+
 void ofxDepthGenerator::updateMaskPixels() {
 	
 	const XnDepthPixel* depth = dmd.Data();

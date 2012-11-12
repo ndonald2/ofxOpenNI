@@ -68,6 +68,7 @@ public:
 	
 	unsigned char*		getDepthPixels(int forDepthThresholdNumber);
 	unsigned char*		getDepthPixels(int nearThreshold, int farThreshold);
+    ofTexture &         getDepthTexture();
 	
 	xn::DepthGenerator&	getXnDepthGenerator();
 	
