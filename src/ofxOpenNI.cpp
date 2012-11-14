@@ -1836,6 +1836,26 @@ int	ofxOpenNI::getNumTrackedUsers(){
     return currentTrackedUserIDs.size();
 }
 
+ofxOpenNIUser & ofxOpenNI::getUser(XnUserID nID)
+{
+    ofxOpenNIScopedLock scopedLock(bIsThreaded, mutex);
+    ofxOpenNIUser & user = baseUser;
+    map<XnUserID, ofxOpenNIUser>::iterator it = currentTrackedUsers.find(nID);
+    if(it != currentTrackedUsers.end()){
+        user = it->second;
+    }else{
+        if(nID == 0) {
+            ofLogError(LOG_NAME) << "You have requested a user ID of 0 - perhaps you wanted to use getTrackedUser()"
+            << "Returning a reference to the baseUserClass user (it doesn't do anything!!!)!";
+        }else{
+            ofLogError() << "User ID not found. Probably you need to setMaxNumUsers to a higher value!"
+            << "Returning a reference to the baseUserClass user (it doesn't do anything!!!)!";
+        }
+        user.XnID = 0;
+    }
+    return user;
+}
+
 //--------------------------------------------------------------
 ofxOpenNIUser& ofxOpenNI::getTrackedUser(int index){
     ofxOpenNIScopedLock scopedLock(bIsThreaded, mutex);

@@ -181,6 +181,8 @@ public:
     // user tracker methods
     ofxOpenNIUser&	getTrackedUser(int index); // only returns tracked users upto getNumTrackedUsers()
     int	getNumTrackedUsers();
+    
+    ofxOpenNIUser & getUser(XnUserID nID);
 
     void setMaxNumUsers(int numUsers);
     int	getMaxNumUsers();
